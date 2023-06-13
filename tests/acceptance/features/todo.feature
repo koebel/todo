@@ -1,5 +1,3 @@
-todo.feature
-
 Feature: todo
 	As a user
 	I want to add items to the todo list
