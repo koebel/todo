@@ -9,4 +9,3 @@ Feature: todo
 		Given a user has navigated to the homepage
 		When the user adds "new task" to the todo list using the webUI
 		Then card "new task" should be displayed on the webUI
-		Given a user has navigated to the homepage
