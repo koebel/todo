@@ -21,6 +21,7 @@ const todoButton = '.todo-button';
 const todoItem = '.todo .todo-item';
 const todoItemCompleted = '.todo .completed';
 const todoCompleteButton = '.complete-btn';
+const todoDeleteButton = '.trash-btn';
 const todoFilter = '.filter-todo';
 const todoList = '.todo-list';
 
@@ -41,8 +42,6 @@ When('the user adds {string} to the todo list using the webUI', async function(i
 	await page.fill(todoInput, item)
 	// click the button
 	await page.click(todoButton)
-
-    //return 'pending';
     });
        
 Then('card {string} should be displayed on the webUI', async function(item) {
@@ -50,8 +49,6 @@ Then('card {string} should be displayed on the webUI', async function(item) {
 	const text = await page.innerText(todoItem)
 	// assert that its name is similar to what we provided
 	await expect(text).toBe(item)
-
-    //return 'pending';
     });
 
 // scenario2
@@ -75,21 +72,41 @@ Then('the card {string} should be labeled as completed on the webUI', async func
 	//return 'pending';
 	});
 
-/*    
-Then('the card {string} shouldn\'t be displayed if filter uncomplete is applied', async function(item) {
-	// select filter uncomplete
-	//await page.selectOption(todoFilter, {value: "uncomplete"})
-	await page.selectOption(todoFilter, {value: "all"})
-	
-	const i = page.locator(todoItem).count();
-	await expect(i).toBe(0);
-	// check if card is still visible (iterate through all cards)
-	/*
-	for i in itemRoots
-		text = await page.innerText(todoItemCompleted)
-		await expect(text).not.toBe(item);
-		*/
+//scenario3
+When('the user deletes the card {string} using the webUI', async function(item) {
+	await page.click(todoDeleteButton)
+    });
 
-    //return 'pending';
-	//});
+Then('card {string} should not be displayed on the webUI', async function(item) {
+	// Write code here that turns the phrase above into concrete actions
+	// TODO!!!
+	/*
+	// get all items
+	const items = page.locator(todoItem);
+	//const count = items.count();
+	const count = len(items);
+	const text = ""
+	// iterate over all items and check if there is any card with that label
+	for i in items:
+    //get the element/tag
+    	element = items.nth(i)
+    	text = element.inner_text()
+    	await expect(text).not.toBe(item)
+
+	// check if there are no cards? --> would not really check this requirement
+	//const text = await page.innerText(todoItem)
+	// assert that its name is similar to what we provided
+	//await expect(text).not.toBe(item)
+	*/
+    return 'pending';
+    });
+
+//scenario4
+Given('the card {string} has been marked as completed', async function(item) {
+	await page.click(todoCompleteButton)
+    });
+       
+When('the user sets the filter to {string} using the webUI', async function(item) {
+    await page.selectOption(todoFilter, {value: item})
+    });
 
