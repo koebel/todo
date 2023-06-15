@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import './App.css';
 //importing components
 import Form from './components/Form';
-import Todo from "./components/Todo";
+// eslint-disable-next-line 
+import Todo from './components/Todo'; 
 import ToDoList from './components/ToDoList'
 
 function App() {

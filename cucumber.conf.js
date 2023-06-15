@@ -7,7 +7,7 @@ const { chromium } = require("playwright");
 setDefaultTimeout(60000)
 
 // launch the browser
-BeforeAll(async function () {
+BeforeAll(async function() {
    global.browser = await chromium.launch({
        headless: false, // show the test in the browser while running
        slowMo: 1000,
@@ -15,20 +15,20 @@ BeforeAll(async function () {
 });
 
 // create a new browser context and page per scenario
-Before(async function () {
+Before(async function() {
    global.context = await global.browser.newContext();
    // using the browser.newContext([options]) method playwright also allows creating incognito browser contexts
    global.page = await global.context.newPage();
 });
 
 // cleanup after each scenario
-After(async function () {
+After(async function() {
    await global.page.close();
    await global.context.close();
 });
 
 // close the browser
-AfterAll(async function () {
+AfterAll(async function() {
    await global.browser.close();
 });
 
