@@ -24,8 +24,9 @@ Feature: todo
 		Given a user has navigated to the homepage 
 		And a card "task1" has been added to the todo list
 		And a card "task2" has been added to the todo list
+		And a card "task3" has been added to the todo list
 		And the card "task1" has been marked as completed
-		When the user sets the filter to "completed" using the webUI
-		Then card "task1" should be displayed on the webUI
-		But card "task2" should not be displayed on the webUI
+		When the user sets the filter to "uncomplete" using the webUI
+		Then card "task2" should be displayed on the webUI
+		But card "task1" should not be displayed on the webUI
 		
