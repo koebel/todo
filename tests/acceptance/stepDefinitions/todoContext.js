@@ -7,7 +7,7 @@ const { expect } = require("@playwright/test");
 const url = 'http://localhost:3000'
 
 //define selectors
-const homepageElement = '.borderTodo' 
+const homepageElement = '.App' //'.borderTodo' 
 /* 
 is it better to use class or id as selector? according to doc, both of them should be avoided... 
 see https://playwright.dev/docs/locators
@@ -80,7 +80,7 @@ Then('card {string} should not be displayed on the webUI', async function(item) 
 	ensure that there is no card with the given label
 	this test fails if there are two cards with the same label... it seems like label names don't need to be unique in this todo app...
 	*/
-	const locator = await page.locator('.todo-item:text("' + item + '")')
+	const locator = await page.locator(todoItem + ':text("' + item + '")')
 	await expect(locator).not.toBeVisible()
 	});
 
