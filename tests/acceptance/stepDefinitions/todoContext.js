@@ -9,8 +9,7 @@ const url = 'http://localhost:3000'
 //define selectors
 const homepageElement = '.borderTodo' 
 /* 
-is it better to use class or id as selector? 
-according to doc, both of them should be avoided... 
+is it better to use class or id as selector? according to doc, both of them should be avoided... 
 see https://playwright.dev/docs/locators
 CSS and XPath are not recommended as the DOM can often change leading to non resilient tests. 
 Instead, try to come up with a locator that is close to how the user perceives the page 
@@ -75,117 +74,15 @@ When('the user deletes the card {string} using the webUI', async function(item) 
     });
 
 Then('card {string} should not be displayed on the webUI', async function(item) {
-	// TODO!!!
-
-	//const count = await page.locator('.todo-list:has(li.todo-item)').count();
-	//await expect('.todo-item:text("' + item + '")').not.toBeVisible()
-
+	/*
+	just check if there are no cards? 
+	--> this would not really check this requirement, since it's possible that there are several cards
+	ensure that there is no card with the given label
+	this test fails if there are two cards with the same label... it seems like label names don't need to be unique in this todo app...
+	*/
 	const locator = await page.locator('.todo-item:text("' + item + '")')
 	await expect(locator).not.toBeVisible()
-	//const text1 = await page.textContent('.todo-item:text("' + item + '")') 
-	//const text2 = await page.textContent('.todo-list:has(li.todo-item)') + count.toString()
-	//await page.fill(todoInput, text1)
-
-	//return 'pending';
 	});
-	
-	/*
-
-
-	const text = await page.textContent('.todo-list:has(li.todo-item)')
-	const locator = page.locator(todoItem);
-	await expect(locator).not.toBeVisible({timeout=2000});
-	
-	//return 'pending';
-    });
-	/*
-	const text = i.innerText(todoItem)
-	not.toContainText(item);
-
-
-	const count = await page.locator(todoItem).isVisible().count
-
-	if (count > 0){
-		for (let i = 0; i < count; i++)
-		{
-			const temp = page.locator('.todo .todo-item':nth-child(i)).getbytext()
-			await page.fill(todoInput, temp)
-			await expect(temp.not.toBe(item))
-		}
-	}
-		
-/*
-
-	}
-	else
-	{
-		expect(true); // no items selected, thus always true
-	}
-
-		await page.fill(todoInput, await page.locator(todoItem).isVisible().count.toString())
-
-	for (const i of await page.locator(todoItem).isVisible()){
-		const text = i.innerText(todoItem)
-		await page.fill(todoInput, text.toString())
-		await expect(i.innerText(todoItem)).not.toBe(item)
-		}
-	}
-	
-
-	/*
-	// assert that its name is similar to what we provided
-	await expect(text).toBe(item)
-
-	for (const i of await page.locator(todoItem).all()){
-		const text = i.innerText(todoItem)
-		await page.fill(todoInput, text.toString())
-		await expect(i.innerText(todoItem)).not.toBe(item)
-		}
-
-/*
-	//await page.textContent('article:has(div.promo)');
-	const text = await page.textContent('.todo-list:has(li.todo-item)')
-	await expect(text).not.toBe(item)
-
-
-
-	const locator = await page.locator(todoItem)
-	// assert that it's visible
-	await expect(locator).toHaveCount(0)
-	//await expect(todoItem).toHaveCount(0);
-
-	const text = await page.innerText(todoItem)
-	// assert that its name is similar to what we provided
-	await expect(text).toBe(item)
-	
-		const count = await page.locator(todoItem).count();
-	if (count > 0) {
-		const text = await page.innerText(todoItem)
-		await expect(text).not.toBe(item)
-		}
-	else {
-		await expect(count.toEqual(0));
-	}
-
-
-	
-
-	/*
-	//const count = items.count();
-	const count = len(items);
-	const text = ""
-	// iterate over all items and check if there is any card with that label
-	for i in items:
-    //get the element/tag
-    	element = items.nth(i)
-    	text = element.inner_text()
-    	await expect(text).not.toBe(item)
-
-	// check if there are no cards? --> would not really check this requirement
-	//const text = await page.innerText(todoItem)
-	// assert that its name is similar to what we provided
-	//await expect(text).not.toBe(item)
-	*/
 
 //scenario4
 Given('the card {string} has been marked as completed', async function(item) {
